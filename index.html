@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Camera com PhoneGap</title>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1"> 
+               
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="jquery.mobile-1.3.1.css"/>
+<link rel="stylesheet" type="text/css" href="jquery.mobile-1.3.1.min.css"/>
+<script type="text/javascript" src="jquery-1.6.3.min.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.3.1.js"></script>
+<script type="text/javascript" src="camera.js"></script> 
+<script type="text/javascript" src="cordova.js"></script> 
+        <link rel="stylesheet" href="camera.css" type="text/css">
+    </head>
+    
+    <body onload="onLoad()">
+
+        <!-- Home Page (menu page) -->
+        <div data-role="page" id="home_page" data-theme="a">
+            <div data-role="header">
+                
+				<div data-role="navbar" >
+					<ul>
+						<li><a href="#" data-role="button" id="open_camera_button"><img src="camera32x32.png"></a></li>
+						<li><a href="#" data-role="button" id="open_alb_button" ><img src="album32x32.png"></a></li>
+						<li><a href="#" data-role="button" id="open_lib_button" ><img src="lib32x32.png"></a></li>
+						<li><a href="#settings_page" data-role="button" id="settings_button" class="ui-btn"><img src="config32x32.png"></a></li>
+					</ul>
+				</div><!-- /navbar -->
+            </div>
+            
+			<div data-role="content">
+				<img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+				<img style="display:none;" id="largeImage" src="" />
+                     
+                <div id="settings_info" class="ui-body ui-body-b info"></div>
+            </div>
+            
+        </div>
+        
+        <!-- Settings edit page -->
+        <div data-role="page" id="settings_page" data-theme="a">
+            <div data-role="header">
+                <a href="#home_page" id="settings_cancel_button" data-role="button" data-mini="true" class="ui-btn-left">Cancelar</a>
+                <h3>Configurações Imagens</h3>
+                <a href="#home_page" id="settings_ok_button" data-role="button" data-theme="b" data-mini="true" class="ui-btn-right">Salvar</a>
+            </div>
+            
+            <div data-role="content">
+            
+                <form name="settings_form" id="settings_form">
+                    
+                    <div data-role="collapsible-set" data-inset="false" data-mini="true">
+
+                        <div data-role="collapsible" data-collapsed="false">
+                            <h3>Editar Configurações de Imagens</h3>
+                        	
+                            <label for="quality_input" data-mini="true">Qualidade Imagem:</label>
+                            <input id="quality_input" name="quality_input" type="range" min="0" max="100" step="5" value="40" data-mini="true"/>
+                            
+                            <label for="width_input" data-mini="true">Largura:</label>
+                            <input id="width_input" name="width_input" type="range" min="50" max="1500" step="25" value="500" data-mini="true"/>
+                            
+                            <label for="height_input" data-mini="true">Altura:</label>
+                            <input id="height_input" name="height_input" type="range" min="50" max="1500" step="25" value="500" data-mini="true"/>
+                            
+                            <p><label data-mini="true">Editar Imagem:</label></p>
+                            <div data-role="controlgroup">
+                                <label for="edit_input" data-mini="true">Permitir zoom</label>
+                                <input id="edit_input" name="edit_input" type="checkbox" checked data-mini="true">
+                                
+                                <label for="orient_input" data-mini="true">Permitir correção de orientação</label>
+                                <input id="orient_input" name="orient_input" type="checkbox" checked data-mini="true">
+                            </div>
+                    	</div>
+                    	
+                    	<div data-role="collapsible">
+                            <h3>Opções de salvar Imagem</h3>
+                        	
+                            <label for="encod_input" data-mini="true">Tipo de Arquivo:</label>
+                            <select id="encod_input" name="encod_input" data-mini="true">
+                              <option value="0" selected="selected">JPEG</option>
+                              <option value="1">PNG</option>
+                            </select>
+                                  
+                            <label for="save_input" data-mini="true">Salvar foto para álbum</label>
+                            <select name="save_input" id="save_input" data-role="slider" data-mini="true" data-theme="a" data-track-theme="a">
+                                <option value="false">Não</option>
+                            	<option value="true" selected="selected">Sim</option>
+                            </select>
+                    	</div>
+                        
+                        <div data-role="collapsible">
+                            <h3>Opções de abrir imagem</h3>
+                            <label for="media_input" data-mini="true">Tipos de Imagens:</label>
+                            <select id="media_input" name="media_input" data-mini="true">
+                              <option value="0" selected="selected">Imagem</option>
+                              <option value="1">Video</option>
+                              <option value="2">Todas mídias</option>
+                            </select>
+                        </div>
+                    </div>
+                  </form>
+            </div>
+        </div>
+        
+        <!-- Camera capture result page -->
+        <div data-role="page" id="result_page" data-theme="a">
+            <div data-role="header">
+                <h3>Resultado</h3>
+                <a href="#home_page" id="home_button" data-role="button" data-theme="b" data-mini="true" class="ui-btn-right">Voltar</a>
+            </div>
+            <div data-role="content">
+                <img id="pic" src="" style="display: none; border: 2px white;"/>
+            </div>
+        </div>
+	</body>
+</html>
